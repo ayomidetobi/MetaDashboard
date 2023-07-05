@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import dj_database_url
+import django_heroku
 from pathlib import Path
 import os
 
@@ -28,10 +29,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = []
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+ALLOWED_HOSTS = ['*']
+# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+# if RENDER_EXTERNAL_HOSTNAME:
+#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -130,6 +131,7 @@ DATABASES = {
         conn_max_age=600
     )
 }
+WHITENOISE_USE_FINDERS = True
 
 
 # Password validation
@@ -190,4 +192,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar": "sidebar-light-fuchsia",
     #  "sidebar": "sidebar-dark-fuchsia",
 }
-CSRF_TRUSTED_ORIGINS = ['https://ft9ja-stobsy.up.railway.app']
+# CSRF_TRUSTED_ORIGINS = ['https://ft9ja-stobsy.up.railway.app']
+
+
+django_heroku.settings(locals())

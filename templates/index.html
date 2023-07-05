@@ -1,0 +1,430 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  {% include 'links.html' %}
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+  
+  <!-- ======= Header ======= -->
+  {% include 'header.html' %}
+  <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'aside.html' %}
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href=" {% static 'index' %} ">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Total Trade <span>| Month</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-receipt"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6> {{ total_trade_count }} </h6>
+                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Total Balance </h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    {% if total_balance > 100000 %}
+                    <div class="ps-3">
+                    <h6> &#x24;{{ total_balance|floatformat:2 }}</h6>
+                    <span class="text-success small pt-1 fw-bold">{{percentage_increase_balance}}%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                    </div>
+                    {% else %}
+                    <div class="ps-3">
+                      <h6> &#x24;{{ total_balance|floatformat:2 }}</h6>
+                      <span class="text-danger small pt-1 fw-bold">{{percentage_decrease_balance}}%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Revenue Card -->
+
+            <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-12">
+
+              <div class="card info-card customers-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">PNL <span>| This Month</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-graph-up"></i>
+                    </div>
+                    <div class="ps-3">
+                      {% if total_profit_loss > 0 %}
+                      <h6>&#36;{{ total_profit_loss|floatformat:2 }}</h6>
+                      <span class="text-success small pt-1 fw-bold">{{percentage_increase|floatformat:2}}%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                      {% else %}
+                      <h6>&#36;{{ total_profit_loss|floatformat:2 }}</h6>
+                      <span class="text-danger small pt-1 fw-bold">{{percentage_decrease|floatformat:2}}%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div><!-- End Customers Card -->
+
+            <!-- Reports -->
+            <div class="col-12">
+              <div class="card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" id='one_month'>This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Reports <span>/Today</span></h5>
+
+                  <!-- Line Chart -->
+                  <div id="reportsChart"></div>
+
+                  <script>
+                    
+                        
+                    let pnl={{balance_data|safe}};
+                    let time= "{{trade.timestamp}}";
+                    let equ={{equity_data |safe}}
+                    let categories = {{ time_data|safe }};
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'trade balance',
+                          data: pnl
+                        }],
+                        chart: {
+                          height: 350,
+                          type: 'area',
+                          id: 'area-datetime',
+                          zoom: {
+                            autoScaleYaxis: true
+                          },
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        markers: {
+                          size: 4
+                        },
+                        colors: ['#2eca6a', '#ff771d'],
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 2
+                        },
+                        xaxis: {
+                          type: time,
+                          categories: categories,
+                          tickAmount: 6,
+                        },
+                        tooltip: {
+                          x: {
+                            format: 'dd/MM/yy HH:mm'
+                          },
+                        }
+                      }).render();
+                    });
+                    
+                 
+                  </script>
+                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                  
+              function updateChartData() {
+                $.ajax({
+                  url: "{% url 'update_chart_data' %}",
+                  type: "GET",
+                  dataType: "json",
+                  headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                  },
+                  success: function(data) {
+                    // Update chart data using the received data
+                    // Replace the 'chart-id' with your actual chart ID
+                    
+                    let data_pnl=  {{ balance_data |safe}};
+                    let time= "{{trade.timestamp}}";
+                    let categories = {{ time_data|safe }};
+                    let equ={{equity_data |safe}}
+                    new ApexCharts(document.querySelector("#reportsChart"), {
+                      updateSeries: [ {
+                        name: 'Profit/Loss',
+                        data: data_pnl
+                      }],
+                      chart: {
+                        height: 350,
+                        type: 'area',
+                        id: 'area-datetime',
+                        zoom: {
+                          autoScaleYaxis: true
+                        },
+                        toolbar: {
+                          show: false
+                        },
+                      },
+                      markers: {
+                        size: 4
+                      },
+                      colors: ['#2eca6a', '#ff771d'],
+                      fill: {
+                        type: "gradient",
+                        gradient: {
+                          shadeIntensity: 1,
+                          opacityFrom: 0.3,
+                          opacityTo: 0.4,
+                          stops: [0, 90, 100]
+                        }
+                      },
+                      dataLabels: {
+                        enabled: false
+                      },
+                      stroke: {
+                        curve: 'smooth',
+                        width: 2
+                      },
+                      xaxis: {
+                        type: time,
+                        categories: categories,
+                        tickAmount: 6,
+                      },
+                      tooltip: {
+                        x: {
+                          format: 'dd/MM/yy HH:mm'
+                        },
+                      }
+                    }).render();
+                  },
+                  error: function(xhr, status, error) {
+                    console.error(error);
+                  }
+                });
+                
+              };
+
+              $(document).ready(function() {
+                // Update chart data every minute
+                setInterval(updateChartData, 60000);
+              });
+            </script>
+            <script>
+              function reloadPage() {
+                location.reload();
+              }
+              
+              $(document).ready(function() {
+                // Reload the page every 1 minute
+                setInterval(reloadPage, 60000);
+              });
+            </script>
+                  <!-- End Line Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End Reports -->
+
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Trader</th>
+                        <th scope="col">Time of trade</th>
+                        <th scope="col">PNL</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for trade in Trades %}
+                      <tr>
+                        <th scope="row"><a href="#">#{{ trade.id }}</a></th>
+                        <td>{{ trade.trader }}</td>
+                        <td><a href="#" class="text-primary">{{ trade.timestamp }}</a></td>
+                        <td>${{ trade.profit_loss }}</td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+
+           
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  {% include 'script.html' %}
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}
+
+{% endblock %}
+{% block content %}
+
+<h1>Account List</h1>
+
+<ul>
+  {% for account in accounts %}
+    <li{% if account == active_account %} class="active"{% endif %}}>
+        <a href="{% url 'switch_metatrader_account' account.id %}"> Account: {{ account.account }} </a> <br>
+      {% if account == active_account %}
+        (Active)
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
+{% if active_account %}
+  <h2>Active Account</h2>
+  <p>Balance: {{ balance }}</p>
+  <p>Equity: {{ equity }}</p>
+{% else %}
+  <p>No active account found.</p>
+{% endif %}
+{% endblock %}

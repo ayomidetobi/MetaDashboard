@@ -1,1 +1,0 @@
-web: gunicorn 'Trading.wsgi'

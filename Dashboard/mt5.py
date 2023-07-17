@@ -5,6 +5,9 @@ import MetaTrader5 as mt5
 # Login: 5015083861
 # Password: slzlug4k
 # Investor: 3knqixcs
+# 5319244
+
+# Deriv-Demo
 def get_balance():
     # establish connection to the MetaTrader 5 terminal
     if not mt5.initialize():
